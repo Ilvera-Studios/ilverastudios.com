@@ -1,0 +1,38 @@
+# Global settings for ilverastudios.com. Edit here, then run: python3 build.py
+name: ILVERA Studios
+url: https://ilverastudios.com
+email: justin@ilverastudios.com
+instagram_url: https://www.instagram.com/ilverastudios/
+instagram_handle: "@IlveraStudios"
+tsp_channel_url: https://www.youtube.com/@thesimpleproof
+updated: "2026-11-25"
+
+# Set when a scheduling page exists (Calendly, Google Calendar booking page...).
+# While empty, "Book a discovery call" leads to the inquiry form, which asks for a call.
+booking_url: ""
+
+# Inquiry form delivery. While endpoint is empty, the form opens a pre-filled email
+# and shows the message with a copy button, so no inquiry is lost.
+form:
+  endpoint: ""          # e.g. https://formspree.io/f/xxxxxxx or https://api.web3forms.com/submit
+  extra_fields: {}      # e.g. {access_key: "..."} for Web3Forms (a public key, not a secret)
+
+# Visitor analytics. Nothing loads while provider is "none".
+analytics:
+  provider: none        # none | plausible | umami
+  script_src: ""        # the provider's script URL
+  site_id: ""           # Plausible: the domain; Umami: the website id
+
+nav:
+  - {label: Work, path: /work/}
+  - {label: Services, path: /services/}
+  - {label: YouTube Production, path: /services/youtube-production/}
+  - {label: Originals, path: /originals/}
+  - {label: About, path: /about/}
+
+cta:
+  label: Book a discovery call
+  short: Book a call
+  path: /contact/
+
+footer_note: Characters shown on this site are fictional and created with AI tools.

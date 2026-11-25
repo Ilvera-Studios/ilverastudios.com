@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+{% block content %}
+{%- set cs = CASE -%}
+<section class="page-hero case-hero" aria-labelledby="page-title">
+  <div class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="{{ link('/work/') }}">Work</a></li><li aria-current="page">{{ cs.title }}</li></ol></nav>
+    {{ m.eyebrow(cs.eyebrow) }}
+    <h1 id="page-title" class="page-title">{{ cs.title }}<span class="page-title-sub">{{ cs.headline }}</span></h1>
+    <p class="lede">{{ cs.lede }}</p>
+    <p class="chips">{{ m.kind_chip(cs.kind) }} {{ m.status_chip(cs.status) }}</p>
+    <p class="ownership-note">{{ cs.ownership }}</p>
+    <div class="actions">
+      {{ m.cta_primary("case-study-top") }}
+      {{ m.btn(cs.channel_label, SITE.tsp_channel_url, "ghost", "social_click:youtube-tsp", external=True) }}
+    </div>
+  </div>
+</section>
+
+<section class="section section-tight" aria-labelledby="glance-title">
+  <div class="wrap">
+    <h2 id="glance-title" class="h3-like">At a glance</h2>
+    {{ m.metric_grid(cs.headline_metrics, cs.period, cs.honest_note) }}
+  </div>
+</section>
+
+<section class="section section-alt" aria-labelledby="start-title">
+  <div class="wrap two-col">
+    <div>
+      {{ m.eyebrow("The starting point") }}
+      <h2 id="start-title">The constraints most businesses face on day one.</h2>
+    </div>
+    <dl class="fact-list">
+      {%- for s in cs.starting_point %}<div class="reveal"><dt>{{ s.title }}</dt><dd>{{ s.text }}</dd></div>{% endfor %}
+    </dl>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="method-title">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        {{ m.eyebrow("How it's made") }}
+        <h2 id="method-title">A production system, not a pile of videos.</h2>
+      </div>
+      <p class="section-intro">167 videos in under seven weeks, more than 20 a week, from one person. AI speeds up research, drafting and backgrounds; a person checks every claim and records every word.</p>
+    </div>
+    <ol class="method">
+      {%- for s in cs.method %}<li class="reveal"><h3>{{ s.title }}</h3><p>{{ s.text }}</p></li>{% endfor %}
+    </ol>
+  </div>
+</section>
+
+<section class="section section-alt" aria-labelledby="watch-title">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        {{ m.eyebrow("Watch the work") }}
+        <h2 id="watch-title">{{ cs.media_title or "Two formats from the channel." }}</h2>
+      </div>
+      <p class="section-intro">{{ cs.media_intro or "Both play here with sound when you press play. Nothing loads until you do." }}</p>
+    </div>
+    <div class="clips{% if cs.media|length == 1 %} clips-single{% endif %}">
+      {%- for c in cs.media %}
+      <figure class="clip{% if c.vertical %} clip-vertical{% endif %} reveal">
+        <video controls preload="none" playsinline poster="{{ asset('media/' ~ c.poster ~ '-' ~ (720 if c.vertical else 1280) ~ '.webp') }}" width="{{ c.w }}" height="{{ c.h }}" data-track-play="clip_play:{{ c.file }}">
+          <source src="{{ asset('media/' ~ c.file) }}" type="video/mp4">
+        </video>
+        <figcaption>{{ c.caption }}</figcaption>
+      </figure>
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="signals-title">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        {{ m.eyebrow("What the data shows") }}
+        <h2 id="signals-title">YouTube kept showing it to new people.</h2>
+      </div>
+      <p class="section-intro">Across dozens of videos, every week, rather than one lucky hit. Same source and period as above unless noted.</p>
+    </div>
+    <div class="table-wrap">
+      <table class="signals stack">
+        <thead><tr><th scope="col">Signal</th><th scope="col">The number</th><th scope="col">What it means for a brand</th></tr></thead>
+        <tbody>
+          {%- for s in cs.signals %}<tr><th scope="row">{{ s.signal }}</th><td data-l="The number">{{ s.number }}</td><td data-l="What it means">{{ s.meaning }}</td></tr>{% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <div class="gap-note reveal">
+      <h3>{{ cs.gap_title }}</h3>
+      <p>{{ cs.gap_text }}</p>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt" aria-labelledby="foryou-title">
+  <div class="wrap two-col">
+    <div>
+      {{ m.eyebrow("What this means for your business") }}
+      <h2 id="foryou-title">If your company knows something customers want explained, we can build the channel that explains it.</h2>
+      <p class="section-intro">It works best for products that need explaining: software, finance, education, health and wellness, technical and specialist products. We bring the production system; you bring the expertise.</p>
+      {{ m.btn("See YouTube production", link("/services/youtube-production/"), "ghost", "service_open:youtube-case") }}
+    </div>
+    <dl class="fact-list">
+      {%- for s in cs.for_you %}<div class="reveal"><dt>{{ s.title }}</dt><dd>{{ s.text }}</dd></div>{% endfor %}
+    </dl>
+  </div>
+</section>
+
+<section class="section section-tight" aria-labelledby="notes-title">
+  <div class="wrap">
+    <details class="data-notes">
+      <summary><h2 id="notes-title" class="h3-like">Data notes</h2></summary>
+      <ul>
+        {%- for n in cs.data_notes %}<li>{{ n }}</li>{% endfor %}
+        <li>The numbers show what one channel did. They are not a promise of what another channel will do.</li>
+      </ul>
+    </details>
+  </div>
+</section>
+
+{{ m.cta_band("Want a channel built with the same system?", "In a discovery call we'll talk through your product, your audience and what a first month of videos could look like.", "case-study") }}
+{% endblock %}

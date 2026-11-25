@@ -1,0 +1,57 @@
+# Case studies. Each entry renders /work/<id>/ with the same template,
+# so a future client case study only needs a new entry here.
+the-simple-proof:
+  title: The Simple Proof
+  kind: founder
+  status: published
+  eyebrow: Case study · Founder portfolio
+  headline: "An educational YouTube channel, built from zero."
+  lede: "How one person built a math and physics channel with no audience and no ad budget, and what its YouTube Studio numbers show from its first views on October 9 to November 23."
+  ownership: "The Simple Proof is owned and run by Justin Whitmore, ILVERA's co-founder. It isn't an ILVERA property or a client project. We show it because it was made with the same production methods we use for client work."
+  channel_label: Visit the channel on YouTube
+  period: "YouTube Studio, October 9 (first views) to November 23, 2026"
+  headline_metrics:
+    - {value: "111,946", label: views}
+    - {value: "700", label: hours watched}
+    - {value: "167", label: "videos published", sub: "34 long-form, 133 Shorts"}
+    - {value: "99.5%", label: "of views from YouTube's own feeds, recommendations and search"}
+    - {value: "48", label: "videos past 1,000 views each"}
+  honest_note: "Subscribers gained in the same period: 184. The channel went for reach first, so most viewers watched without subscribing. Results on one channel don't predict results on another."
+  starting_point:
+    - {title: No audience, text: "The channel was created on September 21, 2026, with zero subscribers."}
+    - {title: No promotion budget, text: "No ads. Links from outside YouTube brought 0.3% of views."}
+    - {title: A hard subject, text: "Math is a topic most people say they avoid."}
+    - {title: A tiny team, text: "One person made every video."}
+  method:
+    - {title: Script, text: "AI helps with research and drafting. A person checks every claim, because a math video is either right or wrong."}
+    - {title: Record, text: "A real presenter records the narration, on camera or voice only. No synthetic voices."}
+    - {title: Animate, text: "Diagrams are rendered from code (Python and Manim), so every shape and number on screen is exact. AI-generated images add backgrounds and scenes."}
+    - {title: Assemble, text: "An in-house tool transcribes the narration, checks it against the script and times every scene to the spoken word."}
+    - {title: Package and publish, text: "Titles are written around a question a curious stranger would click on. Long-form videos are mastered in 4K."}
+  signals:
+    - {signal: YouTube does the distributing, number: "99.5% of views came from YouTube's feeds, recommendations and search (78% from the Shorts feed)", meaning: "The platform judged the videos worth showing. No ad budget was needed to start."}
+    - {signal: It reaches new people, number: "96% of viewers in the 28 days before November 25 were new: about 21,500 people", meaning: "This is reach among people who didn't know the channel yet."}
+    - {signal: "It isn't one viral video", number: "48 videos passed 1,000 views each; the top video is 3.1% of all views", meaning: "The method repeats. Results don't hang on a single hit."}
+    - {signal: "It's steady", number: "Every 7-day stretch since launch drew at least 8,900 views", meaning: "Output you can plan around."}
+    - {signal: Long-form holds attention, number: "Long-form is 12% of views but 55% of watch time, at 3 min 40 s per view on average", meaning: "People stay to learn, and that builds trust."}
+    - {signal: Shorts get watched through, number: "Viewers watch 59% of a Short on average; the best one reaches 98%", meaning: "The hooks and pacing work."}
+    - {signal: The audience is in valuable markets, number: "The United States is the largest market: 18% of views, 25% of watch time", meaning: "The content travels in English-speaking markets."}
+  gap_title: "What it doesn't show yet: subscribers"
+  gap_text: "The channel gained 184 subscribers in the period, about one for every 600 views. It went for reach first. Turning viewers into subscribers, with series formats, end screens and playlists, is the channel's current focus. On client projects we agree the goal first: reach, subscribers, leads or sales."
+  for_you:
+    - {title: A channel strategy, text: "Topics your buyers already search for, a recurring format, and titles and thumbnails that earn the click."}
+    - {title: A look and a voice, text: "Your brand turned into templates, presented by your own expert on camera or by a clearly disclosed digital presenter."}
+    - {title: A rhythm a small team can't usually sustain, text: "For example, weekly long-form explainers plus Shorts cut from them."}
+    - {title: Accuracy checks, text: "Every claim is checked against your materials, and nothing is published without your approval."}
+    - {title: Reporting from YouTube Studio, text: "Views, watch time, retention and audience sources, measured against the goal we agree on."}
+  media_title: "Two formats from the channel."
+  media_intro: "Both play here with sound when you press play. Nothing loads until you do."
+  media:
+    - {file: clip-tsp-short.mp4, poster: clip-tsp-short-poster, w: 720, h: 1280, vertical: true, caption: "A Short from the channel: why hexagon numbers add up to cubes. 39 seconds, with sound."}
+    - {file: clip-tsp-mandelbrot.mp4, poster: clip-tsp-mandelbrot-poster, w: 1280, h: 720, caption: "The opening of the long-form film \"Nobody Designed This Shape. One Equation Did.\" on the Mandelbrot set. 30 seconds, with sound."}
+  data_notes:
+    - "Every figure comes from YouTube Studio for The Simple Proof, read on November 25, 2026."
+    - "Period: October 9, 2026 (the first day with views) to November 23, 2026. Video counts are as of November 25, 2026."
+    - "Studio's totals differ by a few dozen views depending on the breakdown: 111,946 by day and 111,895 by traffic source."
+    - "Since November 16, 2026, YouTube includes TV co-viewing in views and watch time."
+    - "The channel is owned by an ILVERA co-founder. It is not a client project."

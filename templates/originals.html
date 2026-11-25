@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% block content %}
+{%- set C = CATALOG -%}
+<section class="page-hero originals-hero" aria-labelledby="page-title">
+  <div class="wrap">
+    {{ m.eyebrow("ILVERA Originals", "eyebrow-light") }}
+    <h1 id="page-title" class="page-title series-display">Stories, characters and channels we own.</h1>
+    <p class="lede">Our originals are entertainment first. They're also where we develop new formats and characters, and the clearest picture of what we could build for a brand.</p>
+  </div>
+</section>
+
+<div class="originals-list">
+{%- for o in C.originals %}
+<section class="original{% if loop.index is even %} original-flip{% endif %}" id="{{ o.id }}" aria-labelledby="o-{{ o.id }}">
+  <div class="wrap original-grid">
+    <div class="original-visual reveal{% if o.vertical %} is-vertical{% endif %}">
+      {%- if o.image %}
+        {%- if o.vertical %}
+        <div class="duo">
+          {{ m.img(o.image, o.image_alt, "(min-width: 900px) 22vw, 45vw", "duo-a") }}
+          {{ m.img(o.image2, o.image2_alt, "(min-width: 900px) 22vw, 45vw", "duo-b") }}
+        </div>
+        {%- else %}
+        <div class="pair">
+          {{ m.img(o.image, o.image_alt, "(min-width: 900px) 18vw, 40vw", "pair-portrait") }}
+          {{ m.img(o.image2, o.image2_alt, "(min-width: 900px) 34vw, 100vw", "pair-still") }}
+        </div>
+        {%- endif %}
+      {%- else %}
+        <div class="title-card" role="img" aria-label="Title card for {{ o.title }}">
+          <span class="title-card-text">{{ o.title }}</span>
+          <span class="title-card-slash" aria-hidden="true"></span>
+          <span class="title-card-meta" aria-hidden="true">An ILVERA original · In development</span>
+        </div>
+      {%- endif %}
+    </div>
+    <div class="original-copy reveal">
+      <p class="chips">{{ m.kind_chip("original") }} {{ m.status_chip(o.status) }}</p>
+      <h2 id="o-{{ o.id }}" class="series-title">{{ o.title }}</h2>
+      <p class="series-format">{{ o.format }}</p>
+      <p class="series-logline">{{ o.logline }}</p>
+      <p>{{ o.body }}</p>
+      <p class="disclosure">{{ o.note }}</p>
+    </div>
+  </div>
+</section>
+{%- endfor %}
+</div>
+
+<section class="section section-alt" aria-labelledby="why-originals-title">
+  <div class="wrap two-col">
+    <div>
+      {{ m.eyebrow("Why we make originals") }}
+      <h2 id="why-originals-title">Original IP is how a studio earns its own voice.</h2>
+    </div>
+    <div class="prose">
+      <p>Owning our stories lets us try formats before we offer them to clients, build characters audiences follow, and develop properties that can grow into channels, partnerships and products of their own.</p>
+      <p>When a brand asks us for a series or a digital presenter, they're hiring the same team, the same craft and the same standards you see here.</p>
+      <p class="disclosure">How we use AI: our characters are created with AI tools, and we label them that way wherever they appear. No ILVERA character is presented as a real person.</p>
+      <div class="actions actions-tight">
+        {{ m.btn("Branded entertainment and microdramas", link("/services/", "#branded-entertainment"), "ghost", "service_open:originals") }}
+      </div>
+    </div>
+  </div>
+</section>
+
+{{ m.cta_band("Want a series or a character of your own?", "We build branded series, microdramas and digital presenters for businesses. Start with a discovery call.", "originals") }}
+{% endblock %}

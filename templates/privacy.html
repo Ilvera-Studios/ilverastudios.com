@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="page-hero" aria-labelledby="page-title">
+  <div class="wrap narrow">
+    {{ m.eyebrow("Privacy") }}
+    <h1 id="page-title" class="page-title">Privacy notice</h1>
+    <p class="lede">What we collect when you contact us, why, and what you can ask us to do with it. Last updated {{ SITE.updated_human }}.</p>
+  </div>
+</section>
+<section class="section section-tight">
+  <div class="wrap narrow prose legal">
+    <h2>Who we are</h2>
+    <p>ILVERA Studios is run by its founders, Evan Surratt and Justin Whitmore. For anything about your data, email <a href="mailto:{{ SITE.email }}">{{ SITE.email }}</a>.</p>
+
+    <h2>What we collect</h2>
+    <p>When you use our inquiry form or email us, we receive the details you choose to send: your name, business name, email address, website or channel, and what you tell us about your project, timeline and budget.</p>
+    <p>This site doesn't use advertising cookies or tracking pixels. If we add visitor statistics, we'll use a privacy-friendly tool that doesn't use cookies, and we'll update this notice before we do.</p>
+
+    <h2>Why we use it</h2>
+    <p>Only to reply to you and to discuss a possible project. The legal bases are taking steps you've asked for before a possible contract, and our legitimate interest in answering business inquiries. We don't sell your data or add you to a mailing list.</p>
+
+    <h2>Who handles it</h2>
+    <p>The founders, plus the services that deliver our email and, when you use the form, the service that passes your message to our inbox. Those providers process it only to deliver it to us.</p>
+
+    <h2>How long we keep it</h2>
+    <p>If your inquiry doesn't lead to a project, we delete it within 12 months. If it does, we keep what we need to run the project and meet our legal obligations.</p>
+
+    <h2>Your rights</h2>
+    <p>You can ask us to show you, correct or delete what we hold about you, to stop using it, or to send it to you in a portable format. Email us and we'll respond within one month. You can also complain to your data protection authority; in France, that's the CNIL.</p>
+
+    <h2>Videos, fonts and links</h2>
+    <p>Videos and fonts on this site are served from this site, not from third parties. Videos with sound play only when you press play. Links to other sites, such as YouTube or Instagram, are covered by those sites' own privacy policies.</p>
+
+    <h2>Changes</h2>
+    <p>If we change how we handle your data, we'll update this page and its date.</p>
+  </div>
+</section>
+{% endblock %}

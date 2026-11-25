@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% block content %}
+{%- set C = CATALOG -%}
+<section class="page-hero" aria-labelledby="page-title">
+  <div class="wrap">
+    {{ m.eyebrow("About") }}
+    <h1 id="page-title" class="page-title">A small studio that delivers finished work.</h1>
+    <p class="lede">ILVERA Studios is an independent production company founded by Evan Surratt and Justin Whitmore. We produce video for businesses and develop original entertainment of our own.</p>
+  </div>
+</section>
+
+<section class="section section-tight" aria-labelledby="beliefs-title">
+  <div class="wrap">
+    <h2 id="beliefs-title" class="sr-only">What we believe</h2>
+    <div class="beliefs">
+      <div class="belief reveal"><p class="mono-label">Results first</p><p>People hire us for videos that get watched and do their job, not for the tools we use to make them.</p></div>
+      <div class="belief reveal"><p class="mono-label">Craft at every step</p><p>Story, script, picture, sound and packaging. AI-assisted methods make us fast; judgment and taste make the work good.</p></div>
+      <div class="belief reveal"><p class="mono-label">Honest by default</p><p>We label AI-generated characters, keep our own projects separate from client work, and never promise views or sales.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt" aria-labelledby="founders-title">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        {{ m.eyebrow("The founders") }}
+        <h2 id="founders-title">Two founders with different strengths.</h2>
+      </div>
+      <p class="section-intro">One brings two decades in hospitality and entertainment; the other builds the production system and runs the creative. Both are involved in the work.</p>
+    </div>
+    <div class="founders founders-detailed">
+      {%- for f in C.founders %}{{ m.founder_card(f, True) }}{% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="how-title">
+  <div class="wrap two-col">
+    <div>
+      {{ m.eyebrow("Where we work") }}
+      <h2 id="how-title">Remote, in English and French.</h2>
+    </div>
+    <div class="prose">
+      <p>We work remotely with businesses of all sizes, starting with independent brands and small and medium-sized companies in the United States, the United Kingdom and the rest of Europe. We produce in English and French.</p>
+      <p>We're a new studio, and we'll tell you exactly what we have and haven't done. What you'll get is direct access to the people making your work, a clear written scope, and finished files on the agreed date.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt" aria-labelledby="name-title">
+  <div class="wrap two-col">
+    <div>
+      {{ m.eyebrow("The name") }}
+      <h2 id="name-title">ILVERA, said "il-VAIR-uh".</h2>
+    </div>
+    <div class="prose">
+      <p>The name comes from the French <i lang="fr">il verra</i>, "one will see", and <i>vera</i>, truth. It's a reminder of what we're for: work you can see, and claims you can check.</p>
+      <p class="small-note">In French it's said <span lang="fr">"il-vé-RA"</span>.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="process-title">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        {{ m.eyebrow("How we work") }}
+        <h2 id="process-title">Six steps, every project.</h2>
+      </div>
+    </div>
+    {{ m.process_list(C.process) }}
+  </div>
+</section>
+
+{{ m.cta_band("Let's talk about your project.", "A discovery call is the quickest way to find out whether we're the right studio for you.", "about") }}
+{% endblock %}

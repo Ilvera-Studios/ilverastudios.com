@@ -1,0 +1,224 @@
+{% extends "base.html" %}
+{% block content %}
+{%- set C = CATALOG -%}
+
+{# 1. Manifesto and hero #}
+<section class="hero" aria-labelledby="hero-title">
+  <div class="wrap">
+    {{ m.eyebrow("Commercial production · Original entertainment") }}
+    <h1 id="hero-title" class="manifesto"><span class="manifesto-a">Made to be watched.</span> <span class="manifesto-b">Start to finish.</span></h1>
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <p class="lede">ILVERA Studios is an independent production company. Businesses hire us to make YouTube channels, product ads, commercials and branded series. We also create original shows and characters of our own.</p>
+        <div class="actions">
+          {{ m.cta_primary("hero") }}
+          {{ m.btn("Explore our work", link("/work/"), "ghost", "cta_explore_work:hero") }}
+        </div>
+        <p class="hero-proof"><a href="{{ link('/work/the-simple-proof/') }}" data-track="evidence_open:hero">Evidence first: see how our founder's educational channel drew 111,946 views in under seven weeks, with no ads {{ m.icon("arrow") }}</a></p>
+      </div>
+      <figure class="reel" data-reel data-cues='{{ REEL_CUES|tojson }}'>
+        <div class="reel-screen">
+          <span class="reel-slash" aria-hidden="true"></span>
+          <video class="reel-video" autoplay muted loop playsinline preload="metadata" poster="{{ asset('media/reel-poster-1280.webp') }}" aria-label="A {{ REEL_CUES[-1].end|round|int }}-second reel of ILVERA and founder work, without sound.">
+            <source src="{{ asset('media/reel-640.mp4') }}" type="video/mp4" media="(max-width: 700px)">
+            <source src="{{ asset('media/reel-1280.mp4') }}" type="video/mp4">
+          </video>
+          <button class="reel-toggle" type="button" data-track="reel_toggle"><span class="when-playing">{{ m.icon("pause") }}<span class="sr-only">Pause reel</span></span><span class="when-paused">{{ m.icon("play") }}<span class="sr-only">Play reel</span></span></button>
+        </div>
+        <p class="reel-label" aria-hidden="true"><span class="reel-count">1 / {{ REEL_LABELS|length }}</span><span class="reel-label-title">{{ REEL_LABELS[0].title }}</span><span class="reel-label-meta">{{ REEL_LABELS[0].meta }}</span></p>
+        <figcaption class="sr-only">A reel of {{ {1:"one",2:"two",3:"three",4:"four",5:"five",6:"six"}[REEL_LABELS|length] }} productions: {% for l in REEL_LABELS %}{{ l.title }} ({{ l.short }}){% if not loop.last %}; {% endif %}{% endfor %}.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+{# 2. Selected work #}
+<section class="section" aria-labelledby="work-title">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        {{ m.eyebrow("Selected work") }}
+        <h2 id="work-title">Finished work, clearly labeled.</h2>
+      </div>
+      <p class="section-intro">Each piece says who owns it and where it stands, so you always know what you're looking at.</p>
+    </div>
+    <div class="work-grid">
+      {%- for item in C.work if item.id in ["the-simple-proof", "sienna-torneu", "will-vegas-hire-her"] %}
+      {{ m.work_card(item) }}
+      {%- endfor %}
+    </div>
+    <p class="section-more">{{ m.btn("See all work", link("/work/"), "ghost", "cta_explore_work:selected") }}</p>
+  </div>
+</section>
+
+{# 3. What we produce #}
+<section class="section section-alt" aria-labelledby="produce-title">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        {{ m.eyebrow("What we produce") }}
+        <h2 id="produce-title">Seven services, organized by what you need video to do.</h2>
+      </div>
+      <p class="section-intro">Start from the job, not the format. Every service is produced by the same small team, from idea to final file.</p>
+    </div>
+    <div class="needs">
+      {%- for g in C.service_groups %}
+      <div class="need reveal{% if loop.first %} need-feature{% endif %}">
+        <div class="need-head"><h3 class="need-title">{{ g.need }}</h3>{% if loop.first %}<p class="need-tag">Where most clients start</p>{% endif %}</div>
+        <ul class="need-list">
+          {%- for sid in g.services %}{% set s = C.services[sid] %}
+          <li><a href="{{ link(s.page) if s.page else link('/services/', '#' ~ sid) }}" data-track="service_open:{{ sid }}"><span class="need-service">{{ s.name }}</span><span class="need-desc">{{ s.short }}</span></a></li>
+          {%- endfor %}
+        </ul>
+      </div>
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+
+{# 4. Build your YouTube brand #}
+<section class="section yt-band" aria-labelledby="yt-title">
+  <div class="wrap yt-grid">
+    <div>
+      {{ m.eyebrow("Where most clients start") }}
+      <h2 id="yt-title">Build a YouTube presence without building a production team.</h2>
+      <p class="lede">Many businesses have a great product and real expertise, and no time or team to turn them into video. We plan the channel, write and produce the videos, package them, and keep them coming on a schedule you approve.</p>
+      <div class="actions">
+        {{ m.btn("See YouTube production", link("/services/youtube-production/"), "primary", "service_open:youtube-home") }}
+        {{ m.btn("Book a discovery call", link(SITE.cta.path), "ghost", "cta_book_call:youtube-band") }}
+      </div>
+    </div>
+    <div class="yt-points">
+      <ul class="slash-list slash-list-lg">
+        <li><strong>Starting from zero, or starting over.</strong> We define who the channel is for and what it will be known for.</li>
+        <li><strong>Formats people recognize.</strong> Series your audience can come back to, not one-off uploads.</li>
+        <li><strong>Long-form and Shorts.</strong> Deeper videos build trust; Shorts reach new people.</li>
+        <li><strong>You stay in control.</strong> You approve every plan, script and video, and you never have to appear on camera.</li>
+      </ul>
+      <ol class="mini-steps" aria-label="How to start">
+        <li><span>1</span>Book a discovery call</li>
+        <li><span>2</span>Get a channel plan and a quote</li>
+        <li><span>3</span>We produce your first videos</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+{# 5. Evidence #}
+<section class="section section-alt" aria-labelledby="evidence-title">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        {{ m.eyebrow("Evidence") }}
+        <h2 id="evidence-title">We've built a channel from zero ourselves.</h2>
+      </div>
+      <p class="section-intro">The Simple Proof is a math and physics channel owned and run by our co-founder, Justin Whitmore. It isn't an ILVERA property or a client project. We show it because it was made with the same methods we use for clients.</p>
+    </div>
+    {{ m.metric_grid(CASE.headline_metrics, CASE.period, CASE.honest_note) }}
+    <div class="evidence-foot">
+      {{ m.btn("Read the case study", link("/work/the-simple-proof/"), "ghost", "evidence_open:home") }}
+    </div>
+  </div>
+</section>
+
+{# 6. Packages #}
+<section class="section" aria-labelledby="packages-title">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        {{ m.eyebrow("Ways to work with us") }}
+        <h2 id="packages-title">One project or a production partnership.</h2>
+      </div>
+      <p class="section-intro">{{ C.pricing_note }}</p>
+    </div>
+    <div class="packages">
+      {%- for p in C.packages %}{{ m.package_card(p) }}{% endfor %}
+    </div>
+    <p class="section-more">{{ m.btn("Compare packages and services", link("/services/", "#packages"), "ghost", "packages_open:home") }}</p>
+  </div>
+</section>
+
+{# 7. ILVERA Originals #}
+{%- set sienna = C.originals[0] %}
+<section class="section originals-band" aria-labelledby="originals-title">
+  <div class="wrap">
+    {{ m.eyebrow("ILVERA Originals", "eyebrow-light") }}
+    <h2 id="originals-title" class="series-display">Stories and characters we own.</h2>
+    <p class="section-intro">Alongside client work we develop our own series, channels and digital personalities. They're where we test new formats, and they show what we could build for a brand.</p>
+    <div class="original-feature reveal">
+      <div class="original-media">
+        {{ m.img(sienna.image, sienna.image_alt, "(min-width: 900px) 22vw, 45vw", "original-portrait") }}
+        {{ m.img(sienna.image2, sienna.image2_alt, "(min-width: 900px) 40vw, 100vw", "original-still") }}
+      </div>
+      <div class="original-text">
+        <p class="chips">{{ m.kind_chip("original") }} {{ m.status_chip(sienna.status) }}</p>
+        <h3 class="series-title">{{ sienna.title }}</h3>
+        <p class="series-format">{{ sienna.format }}</p>
+        <p class="series-logline">{{ sienna.logline }}</p>
+        <p>{{ sienna.body }}</p>
+        <p class="disclosure">{{ sienna.note }}</p>
+        {{ m.btn("Explore ILVERA Originals", link("/originals/"), "ghost", "originals_open:home") }}
+      </div>
+    </div>
+  </div>
+</section>
+
+{# 8. Upcoming productions #}
+<section class="section slate-band" aria-labelledby="slate-title">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        {{ m.eyebrow("Upcoming productions") }}
+        <h2 id="slate-title">In development.</h2>
+      </div>
+      <p class="section-intro">Unfinished work stays out of the portfolio until it's released. Here's what's coming, with its real status.</p>
+    </div>
+    <ul class="slate">
+      {%- for o in C.originals %}
+      <li class="slate-row reveal">
+        <a href="{{ link('/originals/', '#' ~ o.id) }}" data-track="originals_open:slate-{{ o.id }}">
+          <span class="slate-title">{{ o.title }}</span>
+          <span class="slate-format">{{ o.format }}</span>
+          <span class="slate-status">{{ m.status_chip(o.status) }}</span>
+          <span class="slate-logline">{{ o.logline }}</span>
+        </a>
+      </li>
+      {%- endfor %}
+    </ul>
+  </div>
+</section>
+
+{# 9. Production process #}
+<section class="section section-alt" aria-labelledby="process-title">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        {{ m.eyebrow("Our production process") }}
+        <h2 id="process-title">From a first call to finished files.</h2>
+      </div>
+      <p class="section-intro">The same six steps for a single ad or a year of YouTube videos. Nothing is produced until you've approved the plan.</p>
+    </div>
+    {{ m.process_list(C.process) }}
+  </div>
+</section>
+
+{# 10. Founders #}
+<section class="section" aria-labelledby="founders-title">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        {{ m.eyebrow("Meet the founders") }}
+        <h2 id="founders-title">Two founders, directly involved in the work.</h2>
+      </div>
+      <p class="section-intro">ILVERA is a small, new studio. When you work with us, you work with the people who make the work.</p>
+    </div>
+    <div class="founders">
+      {%- for f in C.founders %}{{ m.founder_card(f) }}{% endfor %}
+    </div>
+    <p class="section-more">{{ m.btn("More about the studio", link("/about/"), "ghost", "about_open:home") }}</p>
+  </div>
+</section>
+
+{# 11. Final conversion #}
+{{ m.cta_band("Tell us what you want people to watch.", "Book a discovery call and we'll tell you honestly what we'd make and how we'd make it. Prefer to write? Email us, or find us on Instagram " ~ SITE.instagram_handle ~ ".", "home") }}
+{% endblock %}

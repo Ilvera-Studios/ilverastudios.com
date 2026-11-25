@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="page-hero notfound" aria-labelledby="page-title">
+  <div class="wrap narrow">
+    {{ m.eyebrow("Page not found") }}
+    <h1 id="page-title" class="page-title">This page isn't here.</h1>
+    <p class="lede">The link may be old, or the page may have moved. Here's where most people are headed:</p>
+    <ul class="slash-list slash-list-lg">
+      <li><a href="{{ link('/') }}">Home</a></li>
+      <li><a href="{{ link('/services/youtube-production/') }}">YouTube production for businesses</a></li>
+      <li><a href="{{ link('/work/') }}">Our work</a></li>
+      <li><a href="{{ link('/contact/') }}">Book a discovery call</a></li>
+    </ul>
+  </div>
+</section>
+{% endblock %}

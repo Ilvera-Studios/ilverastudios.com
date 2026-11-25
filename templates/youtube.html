@@ -1,0 +1,149 @@
+{% extends "base.html" %}
+{% block content %}
+{%- set C = CATALOG -%}
+<section class="page-hero yt-hero" aria-labelledby="page-title">
+  <div class="wrap yt-hero-grid">
+    <div>
+      <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="{{ link('/services/') }}">Services</a></li><li aria-current="page">YouTube production</li></ol></nav>
+      {{ m.eyebrow("YouTube video production for businesses") }}
+      <h1 id="page-title" class="page-title page-title-long">The production team your YouTube channel never had.</h1>
+      <p class="lede">We turn your products, expertise and brand into videos people choose to watch: long-form, Shorts and recurring series, produced on a schedule you can keep.</p>
+      <div class="actions">
+        {{ m.cta_primary("youtube-hero") }}
+        {{ m.btn("See the evidence", "#evidence", "ghost", "evidence_open:youtube-hero") }}
+      </div>
+    </div>
+    <aside class="fit-card" aria-labelledby="fit-title">
+      <h2 id="fit-title" class="mono-label">Built for businesses that</h2>
+      <ul class="slash-list">
+        <li>have no YouTube channel yet</li>
+        <li>have a channel that posts without a plan</li>
+        <li>have the expertise, but no time or team to produce video</li>
+        <li>want a presence that lasts, not a one-off video</li>
+      </ul>
+    </aside>
+  </div>
+</section>
+
+<section class="section section-tight" aria-labelledby="why-title">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        {{ m.eyebrow("Why YouTube") }}
+        <h2 id="why-title">Why a YouTube presence is worth building.</h2>
+      </div>
+    </div>
+    <div class="reasons">
+      <div class="reason reveal"><h3>People go there to learn</h3><p>How something works, which product to trust, how to get a result. A good video answers those questions long after it's published, because search and recommendations keep finding it.</p></div>
+      <div class="reason reveal"><h3>One library, many uses</h3><p>The same videos feed your website, your ads, your sales emails and your social accounts.</p></div>
+      <div class="reason reveal"><h3>YouTube does much of the distributing</h3><p>On our founder's channel, 99.5% of views came from YouTube's own feeds, recommendations and search, with no ads. <a href="#evidence">See the numbers.</a></p></div>
+      <div class="reason reveal"><h3>Trust before the first conversation</h3><p>Prospects who've watched you explain your product can arrive already knowing how you think.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt" aria-labelledby="make-title">
+  <div class="wrap two-col">
+    <div>
+      {{ m.eyebrow("What we make") }}
+      <h2 id="make-title">Videos built around your product and your audience.</h2>
+      <p class="section-intro">The emphasis is a coherent channel: a clear promise, recurring formats and a consistent look, rather than disconnected uploads.</p>
+    </div>
+    <ul class="slash-list slash-list-lg">
+      <li>Product explainers and walkthroughs</li>
+      <li>How-to and tutorial series</li>
+      <li>Educational series about your field</li>
+      <li>Brand stories and behind-the-scenes</li>
+      <li>Shorts cut from long-form videos</li>
+      <li>Hosted series with a clearly disclosed digital presenter</li>
+      <li>Launch and announcement videos</li>
+    </ul>
+  </div>
+</section>
+
+<section class="section" id="packages" aria-labelledby="yt-packages-title">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        {{ m.eyebrow("Packages") }}
+        <h2 id="yt-packages-title">Start a channel, or keep one running.</h2>
+      </div>
+      <p class="section-intro">{{ C.pricing_note }}</p>
+    </div>
+    <div class="packages packages-two">
+      {%- for p in C.packages if p.id in ["launch", "recurring"] %}{{ m.package_card(p) }}{% endfor %}
+    </div>
+    <p class="small-note">Need ads, an explainer or a branded series as well? A <a href="{{ link('/services/', '#packages') }}">Custom Production Partnership</a> puts several formats on one plan.</p>
+  </div>
+</section>
+
+<section class="section section-alt" id="evidence" aria-labelledby="evidence-title" tabindex="-1">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        {{ m.eyebrow("Evidence") }}
+        <h2 id="evidence-title">We've done this on our own channel first.</h2>
+      </div>
+      <p class="section-intro">The Simple Proof is an educational channel owned and run by our co-founder, Justin Whitmore. It isn't an ILVERA property or a client project. It's relevant because your channel would be planned, written, animated and packaged with the same methods.</p>
+    </div>
+    {{ m.metric_grid(CASE.headline_metrics, CASE.period, CASE.honest_note) }}
+    <div class="evidence-split">
+      <figure class="clip clip-vertical reveal">
+        <video controls preload="none" playsinline poster="{{ asset('media/clip-tsp-short-poster-720.webp') }}" width="720" height="1280" data-track-play="clip_play:youtube-short">
+          <source src="{{ asset('media/clip-tsp-short.mp4') }}" type="video/mp4">
+        </video>
+        <figcaption>A Short from the channel, 39 seconds, with sound.</figcaption>
+      </figure>
+      <div>
+        <h3>Why this matters for you</h3>
+        <ul class="slash-list">
+          <li>It started with no audience and no ad budget, like most business channels.</li>
+          <li>The views came from YouTube's own recommendations, across 48 videos with 1,000+ views each, not one lucky hit.</li>
+          <li>It's honest about what it hasn't done yet: 184 subscribers in the period. On your channel, we agree the goal first.</li>
+        </ul>
+        {{ m.btn("Read the full case study", link("/work/the-simple-proof/"), "ghost", "evidence_open:youtube") }}
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="faq-title">
+  <div class="wrap two-col">
+    <div>
+      {{ m.eyebrow("Questions") }}
+      <h2 id="faq-title">What business owners ask us.</h2>
+      <p class="section-intro">If your question isn't here, ask it on the call.</p>
+    </div>
+    <div class="faq">
+      {%- for q in YT_FAQ %}
+      <details class="faq-item" id="faq-{{ q.id }}"{% if q.open %} open{% endif %}>
+        <summary data-track="faq_open:{{ q.id }}">{{ q.q }}</summary>
+        <div class="faq-a"><p>{{ q.a }}</p></div>
+      </details>
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt" aria-labelledby="process-title">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        {{ m.eyebrow("Getting started") }}
+        <h2 id="process-title">From a first call to your first videos.</h2>
+      </div>
+      <p class="section-intro">Recurring work repeats the cycle each month, with every batch informed by how the last one performed.</p>
+    </div>
+    {{ m.process_list(C.process) }}
+  </div>
+</section>
+
+<section class="section section-tight" aria-labelledby="promise-title">
+  <div class="wrap promise">
+    <h2 id="promise-title" class="h3-like">What we promise, and what we don't</h2>
+    <p>We promise the deliverables, the schedule and the quality bar we agree in writing. We don't promise views, subscribers or sales, and you should be wary of anyone who does. Production quality, consistent publishing, audience research and learning from each video's performance all help a channel grow. None of them guarantee it.</p>
+  </div>
+</section>
+
+{{ m.cta_band("Let's plan your channel.", "Book a discovery call. We'll look at where you are on YouTube today and tell you what we'd build first.", "youtube") }}
+{% endblock %}

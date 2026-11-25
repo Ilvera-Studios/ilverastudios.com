@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block content %}
+{%- set C = CATALOG -%}
+<section class="page-hero" aria-labelledby="page-title">
+  <div class="wrap">
+    {{ m.eyebrow("Work") }}
+    <h1 id="page-title" class="page-title">Real work, labeled honestly.</h1>
+    <p class="lede">Published videos, founder projects and ILVERA originals. Every piece says who owns it and whether it's finished, so you're never guessing what you're looking at.</p>
+  </div>
+</section>
+
+<section class="section section-tight" aria-labelledby="work-list-title">
+  <div class="wrap">
+    <h2 id="work-list-title" class="sr-only">All work</h2>
+    <div class="filters" role="group" aria-label="Filter work" hidden data-filter-bar>
+      <button type="button" class="filter" aria-pressed="true" data-filter="all">All</button>
+      <button type="button" class="filter" aria-pressed="false" data-filter="published">Published work</button>
+      <button type="button" class="filter" aria-pressed="false" data-filter="founder">Founder portfolio</button>
+      <button type="button" class="filter" aria-pressed="false" data-filter="original">ILVERA originals</button>
+      <button type="button" class="filter" aria-pressed="false" data-filter="development">In development</button>
+    </div>
+    <p class="filter-status sr-only" aria-live="polite" data-filter-status></p>
+    <div class="work-grid work-grid-all">
+      {%- for item in C.work %}{{ m.work_card(item, "h3") }}{% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt" aria-labelledby="legend-title">
+  <div class="wrap legend-grid">
+    <div>
+      {{ m.eyebrow("How to read our work") }}
+      <h2 id="legend-title">Five labels, used everywhere on this site.</h2>
+      <p class="section-intro">We don't have client case studies to show yet, and we won't pretend otherwise. When client work and concept work are published, they'll carry these labels too.</p>
+    </div>
+    <dl class="legend">
+      {%- for c in C.classes %}
+      <div class="legend-row"><dt>{{ c.label }}</dt><dd>{{ c.desc }}</dd></div>
+      {%- endfor %}
+    </dl>
+  </div>
+</section>
+
+{{ m.cta_band("Want something like this for your business?", "Tell us what you sell and who you sell to. We'll show you what we'd make for you.", "work") }}
+{% endblock %}

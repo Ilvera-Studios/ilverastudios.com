@@ -1,0 +1,132 @@
+{# Reusable components. Every image name refers to files made by tools/media.py. #}
+
+{% macro mark(cls="mark") -%}
+<svg class="{{ cls }}" viewBox="12 20 84 60" aria-hidden="true" focusable="false"><rect x="20" y="22" width="12" height="56" rx="1.5" fill="currentColor"/><polygon points="40,22 53,22 65,61 77,22 90,22 70,78 59,78" fill="currentColor"/><polygon points="14,68 92,38 94,45 16,75" fill="#E03E49"/></svg>
+{%- endmacro %}
+
+{% macro wordmark(cls="wordmark") -%}
+<svg class="{{ cls }}" viewBox="{{ WORDMARK.viewbox }}" aria-hidden="true" focusable="false"><path fill="currentColor" d="{{ WORDMARK.d }}"/></svg>
+{%- endmacro %}
+
+{% macro icon(name) -%}
+{%- if name == "arrow" -%}<svg class="icon" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M4 10h11M11 5.5 15.5 10 11 14.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+{%- elif name == "play" -%}<svg class="icon" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M6.5 4.5v11l9-5.5z" fill="currentColor"/></svg>
+{%- elif name == "pause" -%}<svg class="icon" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M6 4.5h3v11H6zM11 4.5h3v11h-3z" fill="currentColor"/></svg>
+{%- elif name == "menu" -%}<svg class="icon" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M3 6h14M3 10h14M3 14h14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+{%- elif name == "close" -%}<svg class="icon" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M5 5l10 10M15 5 5 15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+{%- elif name == "external" -%}<svg class="icon" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M8 4H4.5v11.5H16V12M11 4h5v5M16 4l-7 7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+{%- endif -%}
+{%- endmacro %}
+
+{% macro eyebrow(text, cls="") -%}<p class="eyebrow {{ cls }}">{{ text }}</p>{%- endmacro %}
+
+{% macro img(name, alt, sizes="100vw", cls="", eager=False) -%}
+{%- set v = MEDIA[name] -%}
+{%- set big = v[0] -%}
+<img class="{{ cls }}" src="{{ asset('media/' ~ name ~ '-' ~ v[-1].w ~ '.webp') }}" srcset="{% for x in v|reverse %}{{ asset('media/' ~ name ~ '-' ~ x.w ~ '.webp') }} {{ x.w }}w{% if not loop.last %}, {% endif %}{% endfor %}" sizes="{{ sizes }}" width="{{ big.w }}" height="{{ big.h }}" alt="{{ alt }}"{% if eager %} fetchpriority="high"{% else %} loading="lazy"{% endif %} decoding="async">
+{%- endmacro %}
+
+{% macro status_chip(status) -%}
+<span class="chip chip-status is-{{ status }}">{{ CATALOG.status_labels[status] }}</span>
+{%- endmacro %}
+
+{% macro kind_chip(kind) -%}
+<span class="chip chip-kind">{{ CATALOG.kind_labels[kind] }}</span>
+{%- endmacro %}
+
+{% macro btn(label, href, kind="primary", track="", cls="", external=False) -%}
+<a class="btn btn-{{ kind }} {{ cls }}" href="{{ href }}"{% if track %} data-track="{{ track }}"{% endif %}{% if external %} rel="noopener" target="_blank"{% endif %}>{{ label }}{% if kind != "primary" and not external %} {{ icon("arrow") }}{% endif %}{% if external %} {{ icon("external") }}<span class="sr-only"> (opens in a new tab)</span>{% endif %}</a>
+{%- endmacro %}
+
+{% macro cta_primary(where) -%}
+{{ btn(SITE.cta.label, link(SITE.cta.path), "primary", "cta_book_call:" ~ where) }}
+{%- endmacro %}
+
+{% macro media_frame(item, sizes, eager=False) -%}
+{%- if item.image -%}
+<div class="frame{% if item.vertical %} frame-vertical{% endif %}"{% if item.preview %} data-preview="{{ asset('media/' ~ item.preview) }}"{% endif %}>
+  {%- if item.vertical %}{{ img(item.image, "", "40vw", "frame-blur", False) }}{% endif %}
+  {{ img(item.image, item.image_alt, sizes, "frame-img", eager) }}
+</div>
+{%- elif item.poster_stat -%}
+<div class="frame frame-poster frame-stat" aria-hidden="true"><span class="stat-value">{{ item.poster_stat.value }}</span><span class="stat-label">{{ item.poster_stat.label }}</span><span class="poster-slash"></span></div>
+{%- else -%}
+<div class="frame frame-poster" aria-hidden="true"><span class="poster-title">{{ item.poster_text }}</span><span class="poster-slash"></span></div>
+{%- endif -%}
+{%- endmacro %}
+
+{% macro work_card(item, h="h3", sizes="(min-width: 980px) 33vw, (min-width: 640px) 50vw, 100vw") -%}
+<article class="work-card reveal" id="{{ item.id }}" data-filters="{{ item.filters|join(' ') }} all">
+  {%- if item.link %}<a class="work-media" href="{{ link(item.link) }}" tabindex="-1" aria-hidden="true" data-track="work_open:{{ item.id }}">{{ media_frame(item, sizes) }}</a>
+  {%- else %}<div class="work-media">{{ media_frame(item, sizes) }}</div>{% endif %}
+  <div class="work-body">
+    <p class="chips">{{ kind_chip(item.kind) }} {{ status_chip(item.status) }}</p>
+    <{{ h }} class="work-title">{% if item.link %}<a href="{{ link(item.link) }}" data-track="work_open:{{ item.id }}">{{ item.title }}</a>{% else %}{{ item.title }}{% endif %}</{{ h }}>
+    <p class="work-format">{{ item.format }}</p>
+    <p class="work-summary">{{ item.summary }}</p>
+    <p class="work-credit">{{ item.credit }}</p>
+    {%- if item.link %}<p class="work-link"><a href="{{ link(item.link) }}" data-track="work_open:{{ item.id }}">{{ item.link_label }} {{ icon("arrow") }}</a></p>{% endif %}
+  </div>
+</article>
+{%- endmacro %}
+
+{% macro metric_grid(metrics, period, note="", cls="") -%}
+<div class="metrics {{ cls }}">
+  <dl class="metric-list">
+  {%- for m in metrics %}
+    <div class="metric reveal">
+      <dt class="metric-label">{{ m.label }}{% if m.sub %}<span class="metric-sub">{{ m.sub }}</span>{% endif %}</dt>
+      <dd class="metric-value">{{ m.value }}</dd>
+    </div>
+  {%- endfor %}
+  </dl>
+  <p class="metric-source"><span class="mono-label">Source</span> {{ period }}.{% if note %} {{ note }}{% endif %}</p>
+</div>
+{%- endmacro %}
+
+{% macro package_card(p, h="h3") -%}
+<article class="package reveal" id="{{ p.id }}">
+  <{{ h }} class="package-name">{{ p.name }}</{{ h }}>
+  <p class="package-for">{{ p.for }}</p>
+  <p class="mono-label">Typically includes</p>
+  <ul class="slash-list">
+    {%- for i in p.includes %}<li>{{ i }}</li>{% endfor %}
+  </ul>
+  <p class="package-price">Scoped and quoted after a discovery call</p>
+</article>
+{%- endmacro %}
+
+{% macro process_list(steps) -%}
+<ol class="process">
+  {%- for s in steps %}
+  <li class="process-step reveal"><span class="process-num" aria-hidden="true">{{ "%02d"|format(loop.index) }}</span><h3 class="process-name">{{ s.name }}</h3><p>{{ s.text }}</p></li>
+  {%- endfor %}
+</ol>
+{%- endmacro %}
+
+{% macro founder_card(f, detailed=False) -%}
+<article class="founder reveal" id="founder-{{ f.id }}">
+  <p class="founder-initials" aria-hidden="true">{{ f.name.split(' ')|map('first')|join('') }}</p>
+  <div>
+    <h3 class="founder-name">{{ f.name }}</h3>
+    <p class="founder-role">{{ f.role }}</p>
+    <p>{{ f.bio if detailed else f.short }}</p>
+    {%- if detailed %}<ul class="tag-list" aria-label="Focus areas">{% for t in f.focus %}<li>{{ t }}</li>{% endfor %}</ul>{% endif %}
+  </div>
+</article>
+{%- endmacro %}
+
+{% macro cta_band(title, text, where, secondary=None) -%}
+<section class="cta-band" aria-labelledby="cta-{{ where }}">
+  <div class="wrap cta-inner">
+    <h2 id="cta-{{ where }}" class="cta-title">{{ title }}</h2>
+    <div class="cta-side">
+      <p>{{ text }}</p>
+      <div class="cta-actions">
+        {{ btn(SITE.cta.label, link(SITE.cta.path), "dark", "cta_book_call:" ~ where) }}
+        <a class="btn btn-outline-light" href="mailto:{{ SITE.email }}" data-track="email_click:{{ where }}">{{ SITE.email }}</a>
+      </div>
+    </div>
+  </div>
+</section>
+{%- endmacro %}

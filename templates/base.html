@@ -1,0 +1,106 @@
+{% import "macros.html" as m with context %}<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ page.title }}</title>
+<meta name="description" content="{{ page.description }}">
+<link rel="canonical" href="{{ abs_url(page.route) }}">
+<meta name="theme-color" content="#070709">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ILVERA Studios">
+<meta property="og:title" content="{{ page.og_title or page.title }}">
+<meta property="og:description" content="{{ page.description }}">
+<meta property="og:url" content="{{ abs_url(page.route) }}">
+<meta property="og:image" content="{{ abs_url('/img/og/' ~ page.og ~ '.png') }}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="{{ page.og_title or page.title }}">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="{{ asset('img/brand/favicon.svg') }}" type="image/svg+xml">
+<link rel="icon" href="{{ asset('img/brand/favicon-32.png') }}" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="{{ asset('img/brand/apple-touch-icon.png') }}">
+<link rel="preload" href="{{ asset('fonts/syne.woff2') }}" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="{{ asset('fonts/jakarta.woff2') }}" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="{{ asset('css/site.css') }}?v={{ BUILD_ID }}">
+<script>document.documentElement.classList.replace('no-js','js');</script>
+{%- for block_ld in page.jsonld %}
+<script type="application/ld+json">{{ block_ld|tojson }}</script>
+{%- endfor %}
+{%- if SITE.analytics.provider == "plausible" and SITE.analytics.script_src %}
+<script defer data-domain="{{ SITE.analytics.site_id }}" src="{{ SITE.analytics.script_src }}"></script>
+{%- elif SITE.analytics.provider == "umami" and SITE.analytics.script_src %}
+<script defer data-website-id="{{ SITE.analytics.site_id }}" src="{{ SITE.analytics.script_src }}"></script>
+{%- endif %}
+</head>
+<body class="page-{{ page.slug }}">
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header" id="top">
+  <div class="wrap header-inner">
+    <a class="brand" href="{{ link('/') }}" aria-label="ILVERA Studios, home">{{ m.mark() }}{{ m.wordmark() }}</a>
+    <nav class="nav-desktop" aria-label="Main">
+      <ul>
+        {%- for item in SITE.nav %}
+        <li><a href="{{ link(item.path) }}"{% if page.section == item.path %} aria-current="page"{% endif %}>{{ item.label }}</a></li>
+        {%- endfor %}
+      </ul>
+    </nav>
+    <a class="btn btn-primary btn-small header-cta" href="{{ link(SITE.cta.path) }}" data-track="cta_book_call:header">{{ SITE.cta.short }}</a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu"><span class="menu-open">{{ m.icon("menu") }}<span class="sr-only">Open menu</span></span><span class="menu-close">{{ m.icon("close") }}<span class="sr-only">Close menu</span></span></button>
+  </div>
+  <nav class="mobile-menu" id="mobile-menu" aria-label="Main">
+    <ul>
+      {%- for item in SITE.nav %}
+      <li><a href="{{ link(item.path) }}"{% if page.section == item.path %} aria-current="page"{% endif %}>{{ item.label }}</a></li>
+      {%- endfor %}
+    </ul>
+    <a class="btn btn-primary" href="{{ link(SITE.cta.path) }}" data-track="cta_book_call:menu">{{ SITE.cta.label }}</a>
+    <p class="mobile-menu-mail"><a href="mailto:{{ SITE.email }}" data-track="email_click:menu">{{ SITE.email }}</a></p>
+  </nav>
+</header>
+
+<main id="main" tabindex="-1">
+{% block content %}{% endblock %}
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <div class="footer-brand">
+      <div class="lockup">{{ m.mark("mark mark-lg") }}<span class="lockup-rule" aria-hidden="true"></span><span class="lockup-text">{{ m.wordmark("wordmark wordmark-lg") }}<span class="lockup-sub"><span>ILVERA STUDIOS</span><span><span class="sr-only">Pronounced </span>EN "il-VAIR-uh" · FR <span lang="fr">"il-vé-RA"</span></span></span></span></div>
+      <p class="footer-about">An independent production company. We make video for businesses and original entertainment of our own.</p>
+    </div>
+    <nav class="footer-nav" aria-label="Footer">
+      <p class="mono-label">Studio</p>
+      <ul>
+        <li><a href="{{ link('/work/') }}">Work</a></li>
+        <li><a href="{{ link('/originals/') }}">Originals</a></li>
+        <li><a href="{{ link('/about/') }}">About</a></li>
+      </ul>
+    </nav>
+    <nav class="footer-nav" aria-label="Services">
+      <p class="mono-label">Services</p>
+      <ul>
+        <li><a href="{{ link('/services/youtube-production/') }}">YouTube production</a></li>
+        <li><a href="{{ link('/services/', '#product-advertisements') }}">Product ads</a></li>
+        <li><a href="{{ link('/services/', '#educational-content') }}">Explainer videos</a></li>
+        <li><a href="{{ link('/services/') }}">All services</a></li>
+      </ul>
+    </nav>
+    <div class="footer-contact">
+      <p class="mono-label">Contact</p>
+      <ul>
+        <li><a href="{{ link('/contact/') }}" data-track="cta_book_call:footer">Book a discovery call</a></li>
+        <li><a href="mailto:{{ SITE.email }}" data-track="email_click:footer">{{ SITE.email }}</a></li>
+        <li><a href="{{ SITE.instagram_url }}" rel="noopener" target="_blank" data-track="social_click:instagram">Instagram {{ SITE.instagram_handle }}<span class="sr-only"> (opens in a new tab)</span></a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap footer-legal">
+    <p>© {{ YEAR }} ILVERA Studios. {{ SITE.footer_note }}</p>
+    <p><a href="{{ link('/privacy/') }}">Privacy</a></p>
+  </div>
+</footer>
+<script>window.ILVERA = {{ JS_CONFIG|tojson }};</script>
+<script src="{{ asset('js/site.js') }}?v={{ BUILD_ID }}" defer></script>
+</body>
+</html>

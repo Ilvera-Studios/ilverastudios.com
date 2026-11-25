@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% block content %}
+{%- set C = CATALOG -%}
+<section class="page-hero" aria-labelledby="page-title">
+  <div class="wrap">
+    {{ m.eyebrow("Services") }}
+    <h1 id="page-title" class="page-title">What we produce for businesses.</h1>
+    <p class="lede">Seven services, organized by the job you need video to do. Most clients start with YouTube; many add ads, explainers or a series once the channel is running.</p>
+    <nav class="jump" aria-label="Services on this page">
+      <ul>
+        {%- for g in C.service_groups %}{% for sid in g.services %}
+        <li><a href="#{{ sid }}">{{ C.services[sid].name }}</a></li>
+        {%- endfor %}{% endfor %}
+        <li><a href="#packages">Packages</a></li>
+      </ul>
+    </nav>
+  </div>
+</section>
+
+{%- for g in C.service_groups %}
+<section class="section{% if loop.index is even %} section-alt{% endif %} service-group" aria-labelledby="group-{{ loop.index }}">
+  <div class="wrap">
+    {{ m.eyebrow("If you need to") }}
+    <h2 id="group-{{ loop.index }}" class="group-title">{{ g.need }}</h2>
+    {%- for sid in g.services %}{% set s = C.services[sid] %}
+    <article class="service reveal" id="{{ sid }}">
+      <div class="service-main">
+        <h3 class="service-name">{{ s.name }}</h3>
+        <p class="service-lead">{{ s.short }}</p>
+        <p>{{ s.long }}</p>
+        <p class="service-fit"><span class="mono-label">Good fit</span> {{ s.fit }}</p>
+        <div class="actions actions-tight">
+          {%- if s.page %}{{ m.btn("Explore YouTube production", link(s.page), "primary", "service_open:" ~ sid) }}{% else %}{{ m.btn("Discuss this on a call", link(SITE.cta.path), "primary", "cta_book_call:service-" ~ sid) }}{% endif %}
+          {%- if s.proof %}{{ m.btn(s.proof.label, link(s.proof.path), "ghost", "proof_open:" ~ sid) }}{% endif %}
+        </div>
+      </div>
+      <div class="service-side">
+        <p class="mono-label">Examples of what's included</p>
+        <ul class="slash-list">{% for i in s.includes %}<li>{{ i }}</li>{% endfor %}</ul>
+        <p class="small-note">Exact deliverables are set per project.</p>
+      </div>
+    </article>
+    {%- endfor %}
+  </div>
+</section>
+{%- endfor %}
+
+<section class="section section-alt" id="packages" aria-labelledby="packages-title">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        {{ m.eyebrow("Packages") }}
+        <h2 id="packages-title">Ways to work with us.</h2>
+      </div>
+      <p class="section-intro">{{ C.pricing_note }}</p>
+    </div>
+    <div class="packages">{% for p in C.packages %}{{ m.package_card(p) }}{% endfor %}</div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="process-title">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        {{ m.eyebrow("Process") }}
+        <h2 id="process-title">How a project runs.</h2>
+      </div>
+      <p class="section-intro">Nothing is produced until you've approved the plan, and nothing goes live without your sign-off.</p>
+    </div>
+    {{ m.process_list(C.process) }}
+  </div>
+</section>
+
+{{ m.cta_band("Not sure which service fits?", "That's what the discovery call is for. Tell us what you want video to do and we'll recommend the simplest way to get there.", "services") }}
+{% endblock %}

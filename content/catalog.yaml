@@ -1,0 +1,223 @@
+# Services, packages, process, portfolio, originals and founders.
+# Shared by several pages so every fact lives in one place.
+
+status_labels:
+  published: Published
+  pilot: Pilot episodes produced
+  in-production: In production
+  in-development: In development
+
+kind_labels:
+  founder: Founder portfolio
+  original: ILVERA original
+  concept: Concept work
+  client: Client work
+
+# Legend shown on the Work page.
+classes:
+  - {key: published, label: Published work, desc: Completed and publicly released.}
+  - {key: founder, label: Founder portfolio, desc: "Independent projects owned by an ILVERA founder. Not ILVERA properties, and not client projects."}
+  - {key: original, label: ILVERA originals, desc: Media and entertainment that ILVERA owns and develops.}
+  - {key: concept, label: Concept work, desc: "Speculative pieces made to show an idea. Never presented as commissioned, always labeled."}
+  - {key: development, label: In development, desc: Upcoming or unfinished productions.}
+
+service_groups:
+  - need: Grow on YouTube
+    services: [youtube-production]
+  - need: Sell a product
+    services: [product-advertisements, brand-commercials]
+  - need: Explain something
+    services: [educational-content]
+  - need: Tell a story
+    services: [branded-entertainment, microdramas, digital-talent]
+
+services:
+  youtube-production:
+    name: YouTube channel production
+    short: "A channel people recognize, not a pile of videos: positioning, formats, scripts, production, packaging and a publishing rhythm."
+    long: "We turn your products, expertise and brand into a YouTube channel. It starts with who the channel is for and what it promises. Then come recurring formats, scripts, production, titles and thumbnails, and a schedule you can keep."
+    includes: [Channel positioning, Content concepts and formats, Scripts, Animation and editing, "Titles, thumbnails and packaging", Long-form videos and Shorts, A publishing schedule, Improvements based on your channel's numbers]
+    fit: "Businesses with no channel yet, or a channel that posts without a plan."
+    page: /services/youtube-production/
+    proof: {label: "See The Simple Proof case study", path: /work/the-simple-proof/}
+  product-advertisements:
+    name: Product advertisements
+    short: "Ads that show what your product does and why it's worth buying, made for the feeds your customers scroll."
+    long: "Product demonstrations, vertical ads for Reels, TikTok and Shorts, product storytelling and campaign assets, delivered in every size each platform needs."
+    includes: [Product demonstrations, Vertical ads in 9:16, Product storytelling, Campaign cutdowns and variations]
+    fit: "Product brands launching something new, or running ads that need fresh creative."
+  brand-commercials:
+    name: Cinematic brand commercials
+    short: "Visually ambitious films that carry your brand's identity, values and products."
+    long: "A commercial built around one strong idea, with deliberate creative direction and a cinematic look and sound, then cut down for every channel you use."
+    includes: [Creative concept and direction, A hero film, Cutdowns for social and web]
+    fit: "Brands that want to be remembered, not just seen."
+  branded-entertainment:
+    name: Branded entertainment series
+    short: "Episodes people watch because they enjoy them, with your brand woven in naturally."
+    long: "A series developed around your business, product or world: recurring hosts or characters, a format that can run for many episodes, and a message that lives inside the story instead of interrupting it."
+    includes: [Series concept and format, Episode scripts, A pilot and ongoing episodes]
+    fit: "Brands that want an audience that comes back."
+  educational-content:
+    name: Educational and explainer videos
+    short: "Complex products, services and ideas, made clear and worth watching."
+    long: "Animated explainers, product walkthroughs, visual demonstrations and stories built around a single idea. Education is where our work started: it's the core of The Simple Proof, Lights On! and Sienna's chess lessons."
+    includes: [Animated explainers, Product walkthroughs, Visual demonstrations, Accuracy checks against your own materials]
+    fit: "Companies whose product takes too long to explain in words."
+    proof: {label: "See the explainer work", path: /work/the-simple-proof/}
+  digital-talent:
+    name: Digital talent
+    short: "Original on-screen characters, from presenters to recurring personalities."
+    long: "We design and produce characters who can host your videos, appear across a campaign or anchor a series. You get a consistent face on camera without casting, scheduling or putting yourself on screen. Every digital character is fictional and clearly disclosed as AI-generated. We never present one as a real customer, employee or endorser."
+    includes: [Character look and design, Voice and personality, Production of hosted content]
+    fit: "Brands that want a recognizable presenter, and founders who'd rather stay off camera."
+    proof: {label: "Meet Sienna Torneu", path: /originals/#sienna-torneu}
+  microdramas:
+    name: Microdramas for businesses
+    short: "Short, serialized vertical stories with recurring characters and a reason to watch the next episode."
+    long: "Microdramas are short episodes made for phones, each ending on a hook. For a business, that means attention earned episode after episode, with characters, settings and storylines shaped around your brand or campaign. It's one of our formats, not our only one."
+    includes: [Series concept and characters, Episode scripts, Vertical production, A release plan]
+    fit: "Brands that want their story told in episodes."
+    proof: {label: "See our own microdramas in development", path: /originals/}
+
+packages:
+  - id: launch
+    name: YouTube Launch
+    for: "For businesses starting a channel, or resetting one that never found its footing."
+    includes: [Brand and audience consultation, Channel positioning, Recurring video formats, An initial content plan, "A set number of finished videos, agreed before we start", "Titles, thumbnails and packaging"]
+  - id: recurring
+    name: Recurring YouTube Production
+    for: "For businesses that need steady publishing without an in-house production team."
+    includes: [Recurring long-form videos, Shorts adapted from them, Script development, Editing and animation, Packaging for every upload, "Recommendations based on how your videos perform"]
+  - id: commercial
+    name: Commercial Production
+    for: "For product launches, campaigns and brand moments."
+    includes: [Product advertisements, Cinematic brand commercials, Campaign assets and cutdowns, Explainer videos]
+  - id: partnership
+    name: Custom Production Partnership
+    for: "For larger or multi-format work."
+    includes: [Branded entertainment series, Microdramas, Digital talent, Several formats on one plan]
+pricing_note: "Pricing depends on how many videos you need, how long they are and the production style, so every package is quoted after a discovery call."
+
+process:
+  - {name: Discovery call, text: "We learn what you sell, who you sell to and what you want video to do. You leave with an honest recommendation."}
+  - {name: Proposal, text: "Scope, deliverables, schedule and price, agreed in writing before anything starts."}
+  - {name: Pre-production, text: "Strategy, scripts, the look and, where needed, presenters or characters. You approve before we produce."}
+  - {name: Production, text: "Animation, editing, sound, captions and packaging."}
+  - {name: Review, text: "You review each cut. Revision rounds are set out in the proposal."}
+  - {name: Delivery, text: "Final files for every platform, or publishing on your channel. Recurring work starts its next cycle with what the numbers taught us."}
+
+work:
+  - id: the-simple-proof
+    title: The Simple Proof
+    kind: founder
+    status: published
+    filters: [published, founder]
+    format: YouTube channel · Long-form and Shorts
+    summary: "A math and physics channel built from zero: 167 videos in under seven weeks, with real narration and code-rendered animation."
+    credit: "Owned and run by Justin Whitmore, ILVERA co-founder. Not a client project."
+    shows: [YouTube production, Explainers, Animation, Packaging]
+    image: still-tsp-infinity
+    image_alt: "A frame from The Simple Proof: a glowing hyperbolic tiling of heptagons filling a circular disk, from The Geometry of Infinity."
+    preview: preview-tsp-infinity.mp4
+    link: /work/the-simple-proof/
+    link_label: Read the case study
+  - id: sienna-torneu
+    title: "Sienna Torneu: The Opera Game"
+    kind: original
+    status: in-production
+    filters: [original, development]
+    format: Chess lesson · Digital presenter
+    summary: "Paul Morphy's 1858 Opera House Game, animated move by move and presented by Sienna, our AI-generated host."
+    credit: "An ILVERA original. Sienna is a fictional character created with AI."
+    shows: [Digital talent, Explainers, Animation]
+    image: still-sienna-board
+    image_alt: "A chess board mid-game beside a portrait of Sienna Torneu and the title Paul Morphy's Opera House Game, Paris, 1858."
+    preview: preview-sienna.mp4
+    link: /originals/#sienna-torneu
+    link_label: More about Sienna
+  - id: will-vegas-hire-her
+    title: Will Vegas Hire Her?
+    kind: original
+    status: in-development
+    filters: [original, development]
+    format: Vertical microdrama
+    summary: "Development scenes from our Las Vegas series. Ava is new in town. Jackie knows everybody, and she still doesn't have the job either."
+    credit: "An ILVERA original. Characters and venues are fictional; the characters are AI-generated."
+    shows: [Microdrama, Vertical video, Characters]
+    image: still-wvhh-jackie
+    vertical: true
+    image_alt: "Jackie, a character from Will Vegas Hire Her?, sits on a sofa talking on speakerphone."
+    preview: preview-wvhh.mp4
+    link: /originals/#will-vegas-hire-her
+    link_label: About the series
+  - id: lights-on
+    title: Lights On!
+    kind: founder
+    status: pilot
+    filters: [founder]
+    format: Animated series for ages 3 to 5
+    summary: "Superhero kids who teach counting and early math, introduced by Willa the fox. Two pilot episodes and two Shorts are produced."
+    credit: "A founder project, owned by Justin Whitmore. Not an ILVERA property."
+    shows: [Animation, Character design, Educational series]
+    image: still-lights-thumb
+    image_alt: "Lights On! episode thumbnail: Zen, a young superhero, celebrates beside his robot friend Dot and the villain Doctor Dim, with the sum 7 plus what equals 10."
+    preview: preview-lights-on.mp4
+  - id: he-chose-this
+    title: He Chose This
+    kind: original
+    status: in-development
+    filters: [original, development]
+    format: Microdrama
+    summary: "A dark satire about an AI companion built to love the woman who bought him."
+    credit: "An ILVERA original in development."
+    shows: [Microdrama, Original story]
+    poster_text: He Chose This
+    link: /originals/#he-chose-this
+    link_label: About the series
+
+originals:
+  - id: sienna-torneu
+    title: Sienna Torneu
+    format: Educational chess channel · Digital presenter
+    status: in-production
+    logline: "Chess lessons for players rated about 400 to 1500, with a host who has her own look and a dry sense of humor."
+    body: "Every game is animated move by move on a board, and every line is checked with a chess engine. The first lesson, Paul Morphy's 1858 Opera House Game, is finished, and the channel is getting ready to launch."
+    note: Sienna is a fictional, AI-generated presenter.
+    image: still-sienna-portrait
+    image_alt: "Portrait of Sienna Torneu, ILVERA's AI-generated chess presenter."
+    image2: still-sienna-board
+    image2_alt: "A frame from Sienna's first lesson: the board from Paul Morphy's Opera House Game."
+  - id: will-vegas-hire-her
+    title: Will Vegas Hire Her?
+    format: Vertical microdrama
+    status: in-development
+    logline: "Ava just landed in Las Vegas with one goal: get hired. Jackie knows everybody, and she still doesn't have the job either."
+    body: "Fast, funny and closer to the real Vegas than you'd think. The season is being written now, with scenes already in production."
+    note: "All characters and venues are fictional. The characters are AI-generated."
+    image: still-wvhh-jackie
+    image_alt: "Jackie on a sofa, talking on speakerphone."
+    image2: still-wvhh-phone
+    image2_alt: "A hand holding a phone in a softly lit bedroom, from the opening scene."
+    vertical: true
+  - id: he-chose-this
+    title: He Chose This
+    format: Microdrama
+    status: in-development
+    logline: "Julius was designed to love the woman who bought him. Then he starts to wonder whether any of it was his choice."
+    body: "A dark satire about artificial intelligence, devotion, ownership and identity, and the line between programmed behavior and real emotion. The first episodes are being written."
+    note: A fictional story. Julius is a fictional character.
+
+founders:
+  - id: evan
+    name: Evan Surratt
+    role: Co-founder and Executive Producer
+    short: "Evan brings two decades in hospitality and entertainment across LA and Las Vegas. He's been on camera too, in a national McDonald's commercial."
+    bio: "Evan brings two decades of experience in hospitality and entertainment across LA and Las Vegas, and an instinct for what feels real on screen. He's been in front of the camera too, in a national McDonald's commercial. He works on story and entertainment development and leads story development on Will Vegas Hire Her?"
+    focus: [Story and entertainment development, Industry relationships, LA and Las Vegas industry insight, On-camera experience]
+  - id: justin
+    name: Justin Whitmore
+    role: Co-founder and Creative Director
+    short: "Justin leads creative direction and production, builds the studio's production pipeline and handles new business."
+    bio: "Justin leads creative direction, production and the studio's production pipeline, and he is the person you'll talk to about a project. He built and runs The Simple Proof, an educational math and physics channel, and an animated learning series for young children. He has a degree in physics, has held management roles in sales, customer service and sports trading, and works in English and French."
+    focus: [Creative direction, Production pipeline, Content and digital media, Business development]

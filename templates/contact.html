@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+{% block content %}
+{%- set C = CATALOG -%}
+<section class="page-hero contact-hero" aria-labelledby="page-title">
+  <div class="wrap contact-grid">
+    <div class="contact-intro">
+      {{ m.eyebrow("Contact") }}
+      <h1 id="page-title" class="page-title">Book a discovery call.</h1>
+      <p class="lede">Tell us a little about your business and what you want to make. We'll reply with times for a short call, usually within one business day.</p>
+      {%- if SITE.booking_url %}
+      <div class="actions">{{ m.btn("Pick a time now", SITE.booking_url, "primary", "booking_open", external=True) }}</div>
+      <p class="small-note">Or use the form, and we'll send you times.</p>
+      {%- endif %}
+      <div class="call-card">
+        <h2 class="mono-label">On the call</h2>
+        <ul class="slash-list">
+          <li>We ask about your product, your audience and what you want video to do.</li>
+          <li>We look at what you've already published, if anything.</li>
+          <li>You get an honest recommendation, even if it isn't us.</li>
+        </ul>
+      </div>
+      <div class="direct">
+        <p class="mono-label">Prefer email?</p>
+        <p class="direct-mail"><a href="mailto:{{ SITE.email }}" data-track="email_click:contact">{{ SITE.email }}</a> <button type="button" class="btn btn-ghost btn-small" data-copy="{{ SITE.email }}">Copy address</button></p>
+        <p>Instagram: <a href="{{ SITE.instagram_url }}" rel="noopener" target="_blank" data-track="social_click:instagram">{{ SITE.instagram_handle }}<span class="sr-only"> (opens in a new tab)</span></a></p>
+      </div>
+    </div>
+
+    <form class="inquiry" id="inquiry" novalidate data-form data-endpoint="{{ SITE.form.endpoint }}" data-email="{{ SITE.email }}">
+      <h2 class="form-title">Request a discovery call</h2>
+      <p class="form-note">Fields marked <span aria-hidden="true">*</span><span class="sr-only">with an asterisk</span> are required. Everything else helps us prepare.</p>
+      <div class="field-row">
+        <div class="field">
+          <label for="f-name">Your name <span class="req" aria-hidden="true">*</span></label>
+          <input id="f-name" name="name" type="text" autocomplete="name" required aria-describedby="e-name">
+          <p class="field-error" id="e-name" hidden>Please add your name.</p>
+        </div>
+        <div class="field">
+          <label for="f-business">Business name <span class="req" aria-hidden="true">*</span></label>
+          <input id="f-business" name="business" type="text" autocomplete="organization" required aria-describedby="e-business">
+          <p class="field-error" id="e-business" hidden>Please add your business name.</p>
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label for="f-email">Email <span class="req" aria-hidden="true">*</span></label>
+          <input id="f-email" name="email" type="email" autocomplete="email" required aria-describedby="e-email">
+          <p class="field-error" id="e-email" hidden>Please add an email address we can reply to.</p>
+        </div>
+        <div class="field">
+          <label for="f-site">Website or YouTube channel</label>
+          <input id="f-site" name="website" type="text" inputmode="url" autocomplete="url" placeholder="yourbrand.com">
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label for="f-service">What are you interested in?</label>
+          <select id="f-service" name="service">
+            <option value="">Choose one</option>
+            {%- for g in C.service_groups %}{% for sid in g.services %}<option{% if PREFILL_SERVICE == sid %} selected{% endif %} value="{{ C.services[sid].name }}">{{ C.services[sid].name }}</option>{% endfor %}{% endfor %}
+            <option value="Not sure yet">Not sure yet</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="f-timeline">Preferred timeline</label>
+          <select id="f-timeline" name="timeline">
+            <option value="">Choose one</option>
+            <option>As soon as possible</option>
+            <option>Within a month</option>
+            <option>In 1 to 3 months</option>
+            <option>Later, or just exploring</option>
+          </select>
+        </div>
+      </div>
+      <fieldset class="field">
+        <legend>One project, or ongoing?</legend>
+        <div class="choice-row">
+          <label class="choice"><input type="radio" name="engagement" value="One-off project"> One-off project</label>
+          <label class="choice"><input type="radio" name="engagement" value="Recurring production"> Recurring production</label>
+          <label class="choice"><input type="radio" name="engagement" value="Not sure yet"> Not sure yet</label>
+        </div>
+      </fieldset>
+      <div class="field">
+        <label for="f-budget">Approximate budget</label>
+        <select id="f-budget" name="budget" aria-describedby="h-budget">
+          <option value="">Choose a range</option>
+          <option>Under $2,500</option>
+          <option>$2,500 to $5,000</option>
+          <option>$5,000 to $10,000</option>
+          <option>Over $10,000</option>
+          <option>Not sure yet</option>
+        </select>
+        <p class="field-help" id="h-budget">In US dollars, or the rough equivalent in your currency. It helps us recommend the right scope.</p>
+      </div>
+      <div class="field">
+        <label for="f-goals">What do you want to make, and what should it achieve? <span class="req" aria-hidden="true">*</span></label>
+        <textarea id="f-goals" name="objectives" rows="5" required aria-describedby="e-goals"></textarea>
+        <p class="field-error" id="e-goals" hidden>Please tell us a little about the project.</p>
+      </div>
+      <div class="hp" aria-hidden="true"><label for="f-hp">Leave this empty</label><input id="f-hp" name="company_website" type="text" tabindex="-1" autocomplete="off"></div>
+      <p class="form-privacy">We use your details only to reply to you. See our <a href="{{ link('/privacy/') }}">privacy notice</a>.</p>
+      <button class="btn btn-primary btn-wide" type="submit" data-track="form_submit_click">Request a discovery call</button>
+      <div class="form-status" role="status" aria-live="polite" tabindex="-1" data-form-status></div>
+    </form>
+  </div>
+</section>
+{% endblock %}
