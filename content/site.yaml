@@ -14,7 +14,7 @@ booking_url: ""
 # Inquiry form delivery. While endpoint is empty, the form opens a pre-filled email
 # and shows the message with a copy button, so no inquiry is lost.
 form:
-  endpoint: ""          # e.g. https://formspree.io/f/xxxxxxx or https://api.web3forms.com/submit
+  endpoint: "https://formspree.io/f/xyewonpy"   # Formspree form "Website inquiries" (project: ILVERA discovery call)
   extra_fields: {}      # e.g. {access_key: "..."} for Web3Forms (a public key, not a secret)
 
 # Visitor analytics. Nothing loads while provider is "none".

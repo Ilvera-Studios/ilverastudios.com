@@ -3,7 +3,7 @@ menu, reel, filters, copy, and the inquiry form (validation, email hand-off, and
 
   python3 tools/qa_interact.py
 """
-import http.server, json, socketserver, threading
+import http.server, json, re, socketserver, threading
 from functools import partial
 from pathlib import Path
 from playwright.sync_api import sync_playwright
@@ -22,6 +22,8 @@ def serve(directory):
     return srv, f"http://127.0.0.1:{srv.server_address[1]}"
 
 results = {"axe": {}, "tests": []}
+def contact_html(endpoint):
+    return re.sub(r'data-endpoint="[^"]*"', f'data-endpoint="{endpoint}"', (ROOT / "dist/contact/index.html").read_text())
 def ok(name, cond, detail=""):
     results["tests"].append([name, bool(cond), detail]); print(("PASS " if cond else "FAIL ") + name + (f"  ({detail})" if detail else ""))
 
@@ -79,7 +81,9 @@ with sync_playwright() as p:
     pg.click(".filter[data-filter=development]")
     vis = pg.evaluate("[...document.querySelectorAll('.work-grid-all .work-card')].filter(c => !c.hidden).map(c => c.id)")
     ok("work filter: in development", vis == ["sienna-torneu", "will-vegas-hire-her", "he-chose-this"], str(vis))
-    # form, no endpoint: validation then email hand-off
+    # form, no endpoint: validation then email hand-off (never reaches a real form service)
+    ctx.route("https://formspree.io/**", lambda route: route.abort())
+    pg.route(lambda url: "/contact/" in url, lambda route: route.fulfill(status=200, content_type="text/html", body=contact_html("")))
     pg.goto(BASE + "/contact/?utm_source=linkedin&utm_medium=dm&utm_campaign=launch&utm_content=acme", wait_until="networkidle")
     pg.click("button[type=submit]")
     ok("empty submit shows errors", pg.is_visible("#e-name") and pg.get_attribute("#f-name", "aria-invalid") == "true")
@@ -103,7 +107,8 @@ with sync_playwright() as p:
     ctx.close()
     ctx = b.new_context(viewport={"width": 1280, "height": 900})
     pg = ctx.new_page()
-    html = (ROOT / "dist/contact/index.html").read_text().replace('data-endpoint=""', 'data-endpoint="https://forms.example.test/f/abc"')
+    ctx.route("https://formspree.io/**", lambda route: route.abort())
+    html = contact_html("https://forms.example.test/f/abc")
     pg.route(BASE + "/contact/", lambda route: route.fulfill(status=200, content_type="text/html", body=html))
     posted = []
     pg.route("https://forms.example.test/**", lambda route: (posted.append(route.request.post_data or ""), route.fulfill(status=200, content_type="application/json", headers={"Access-Control-Allow-Origin": "*"}, body='{"ok":true}')))

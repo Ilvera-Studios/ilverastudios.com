@@ -30,6 +30,9 @@ vb, d = (ROOT / "static/img/brand/wordmark.path.txt").read_text().split("\n", 1)
 WORDMARK = {"viewbox": vb.strip(), "d": d.strip()}
 updated = datetime.date.fromisoformat(SITE["updated"])
 SITE["updated_human"] = updated.strftime("%B %-d, %Y")
+# The claude.ai preview can't reach outside services, so it keeps the email hand-off.
+if PREVIEW:
+    SITE["form"] = {"endpoint": "", "extra_fields": {}}
 
 REEL_TEXT = {
     "tsp-infinity": {"title": "The Simple Proof", "meta": "The Geometry of Infinity · Founder project · Published", "short": "founder project, published"},
